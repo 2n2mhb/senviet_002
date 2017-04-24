@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12"
+       ba-panel
+       ba-panel-title="Thông tin sản phẩm"
+       ba-panel-class="with-scroll">
+    <form name="sanphamFrm" class="form-horizontal" ng-submit="savesanpham(sanphamFrm)">
+      <div class="form-group">
+        <label for="inputTensanpham" class="col-sm-2 control-label">Tên sản phẩm</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputTensanpham" placeholder="Nhập tên sản phẩm" ng-model="thongtinsanpham.tensanpham" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputMasanpham" class="col-sm-2 control-label">Mã sản phẩm</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputMasanpham" placeholder="Nhập mã sản phẩm" ng-model="thongtinsanpham.masanpham" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputMota" class="col-sm-2 control-label">Mô tả</label>
+        <div class="col-sm-10">
+          <textarea placeholder="Nhập mô tả cho sản phẩm" class="form-control" id="inputMota" ng-model="thongtinsanpham.mota" required></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputGhichu" class="col-sm-2 control-label">Ghi chú</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputGhichu" placeholder="Ghi chú thêm" ng-model="thongtinsanpham.ghichu">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-warning">Lưu lại</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="col-md-12">
+	  <div ba-panel ba-panel-title="Tìm kiếm và xử lý đơn hàng" ba-panel-class="with-scroll">
+		<div class="datepicker row">
+		  <div class="col-sm-6">
+			<div class="form-group">
+			  <label for="inputFirstName">Từ ngày</label>
+			  <p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="opened1" is-open="datepicker.opened1" ng-required="true" close-text="Close" alt-input-formats="format" show-button-bar="false" />
+				  <span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open($event, 'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+				  </span>
+				</p>
+			</div>
+		  </div>
+		  <div class="col-sm-6">
+			<div class="form-group">
+			  <label for="inputLastName">Đến ngày</label>
+			  <p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="opened2" is-open="datepicker.opened2" ng-required="true" close-text="Close" alt-input-formats="format" show-button-bar="false" />
+				  <span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open($event, 'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+				  </span>
+				</p>
+			</div>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-6">
+			<div class="form-group">
+			  <label for="inputFirstName">Cửa hàng đặt</label>
+			  <input type="email" class="form-control" id="inputEmail" placeholder="Cửa hàng">
+			</div>
+		  </div>
+		  <div class="col-sm-6">
+			<div class="form-group">
+			  <label for="inputFirstName">Trạng thái đơn hàng</label>
+			  <input type="email" class="form-control" id="inputEmail" placeholder="Trạng thái">
+			</div>
+		  </div>
+		</div>
+		<button class="btn btn-primary" ng-click="searchRecords()">Tìm kiếm</button>
+		<br/>
+		<hr/>
+		<div class="horizontal-scroll">
+		  
+		  <table class="table" st-table="rowCollection" st-safe-src="recordList">
+			<thead>
+			<tr class="sortable ">
+			  <th class="table-id" st-sort="id" st-sort-default="true">#</th>
+			  <th st-sort="date">Mã đơn</th>
+			  <th st-sort="username">Cửa hàng đặt</th>
+			  <th st-sort="time">Trạng thái</th>
+			  <th st-sort="location">Thành tiền</th>
+			  <th st-sort="status">操作</th>
+			</tr>
+			
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in rowCollection">
+			  <td class="table-id">{{item.madonhang}}</td>
+			  <td>{{item.common.cuahangnhan}}</td>
+			  <td>{{item.username}}</td>
+			  <td>{{item.time}}</td>
+			  <td>{{item.location}}</td>
+			  <td>{{item.status}}</td>
+			</tr>
+			</tbody>
+			<tfoot>
+			<tr>
+			  <td colspan="6" class="text-center">
+				<div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+			  </td>
+			</tr>
+			</tfoot>
+		  </table>
+		</div>
+	  </div>
+	</div>
+</div>

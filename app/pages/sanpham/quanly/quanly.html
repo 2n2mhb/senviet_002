@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-12"
+       ba-panel
+       ba-panel-title="Danh sách sản phẩm"
+       ba-panel-class="with-scroll">
+    
+      <div class="add-row-editable-table">
+        <button class="btn btn-primary" ng-click="themsanpham()">Thêm sản phẩm</button>
+      </div>
+      <table class="table table-bordered table-hover table-condensed">
+    <tr style="font-weight: bold">
+      <td style="width:15%">Tên sản phẩm</td>
+      <td style="width:15%">Mã sản phẩm</td>
+      <td style="width:30%">Mô tả</td>
+      <td style="width:20%">Ghi chú</td>
+      <td style="width:10%">Thao tác</td>
+    </tr>
+    <tr ng-repeat="sanpham in danhsachsanpham">
+      <td>
+        <!-- editable status (select-local) -->
+        <span>
+          {{ sanpham.tensanpham }}
+        </span>
+      </td>
+      <td>
+        <!-- editable status (select-local) -->
+        <span>
+          {{ sanpham.masanpham }}
+        </span>
+      </td>
+      <td>
+        <!-- editable Soluong (select-remote) -->
+        <span>
+          {{ sanpham.mota }}
+        </span>
+      </td>
+      <td>
+        <!-- editable Soluong (select-remote) -->
+        <span>
+          {{ sanpham.ghichu }}
+        </span>
+      </td>
+      <td style="white-space: nowrap">
+        <div class="buttons">
+          <button class="btn btn-primary editable-table-button btn-xs" ng-click="chitietSanpham(sanpham._id)">sửa</button>
+        </div>  
+      </td>
+    </tr>
+  </table>
+     
+  </div>
+</div>

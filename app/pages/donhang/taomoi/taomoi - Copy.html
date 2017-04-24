@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="col-md-12"
+       ba-panel
+       ba-panel-title="Tạo đơn hàng"
+       ba-panel-class="with-scroll">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="inputMadonhang" class="col-sm-2 control-label">Mã đơn hàng</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputMadonhang" ng-model="thongtindonhang.madonhang" required disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputCuahanggiao" class="col-sm-2 control-label">Bên cung cấp</label>
+        <div class="col-sm-10">
+          <ui-select ng-model="thongtindonhang.cuahanggiao"
+               id="inputBencungcap"
+               class="btn-group bootstrap-select form-control"
+               ng-disabled="false"
+               append-to-body="true"
+               search-enabled="false"
+               on-select="onCuahanggiaoSelected($item)">
+            <ui-select-match placeholder="Chọn bên cung cấp">
+              <span> {{$select.selected.tencuahang}}</span>
+            </ui-select-match>
+            <ui-select-choices repeat="standardItem.tencuahang as standardItem in cuahanggiaos | filter: $select.search">
+              <span ng-bind-html="standardItem.tencuahang"></span>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputCuahangnhan" class="col-sm-2 control-label">Bên nhận</label>
+        <div class="col-sm-10">
+          <ui-select ng-model="thongtindonhang.cuahangnhan"
+               id="inputTrangthai"
+               class="btn-group bootstrap-select form-control"
+               ng-disabled="false"
+               append-to-body="true"
+               search-enabled="false" required
+               on-select="onCuahangnhanSelected($item)">
+            <ui-select-match placeholder="Chọn cửa hàng">
+              <span> {{$select.selected.tencuahang}}</span>
+            </ui-select-match>
+            <ui-select-choices repeat="standardItem.tencuahang as standardItem in cuahangnhans | filter: $select.search">
+              <span ng-bind-html="standardItem.tencuahang | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputNguoinhan" class="col-sm-2 control-label">Người nhận</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputNguoinhan" ng-model="thongtindonhang.nguoinhan" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputSdt" class="col-sm-2 control-label">Số điện thoại</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputSdt" ng-model="thongtindonhang.sdt" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputDiachinhan" class="col-sm-2 control-label">Địa chỉ</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputDiachinhan" ng-model="thongtindonhang.diachinhan" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputNgaydat" class="col-sm-2 control-label">Ngày đặt</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputNgayg" ng-model="thongtindonhang.ngaydathang" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputGhichu" class="col-sm-2 control-label">Ghi chú</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputGhichu" placeholder="Nhập ghi chú" ng-model="thongtindonhang.ghichu">
+        </div>
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Chọn sản phẩm và số lượng</label>
+        <div class="col-sm-10">
+          <div class="add-row-editable-table">
+            <button class="btn btn-primary" ng-click="addSanpham()">Thêm</button>
+          </div>
+          <table class="table table-bordered table-hover table-condensed">
+            <tr style="font-weight: bold">
+              <td style="width:30%">Tên mặt hàng</td>
+              <td style="width:15%">Số lượng</td>
+              <td style="width:15%">Giá</td>
+              <td style="width:15%">Thao tác</td>
+            </tr>
+            <tr ng-repeat="sanpham in thongtindonhang.sanphams">
+              <td>
+                <!-- editable status (select-local) -->
+                <span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
+                  {{ sanpham.tensanpham.tensanpham || 'Error.' }}
+                </span>
+              </td>
+              <td>
+                <!-- editable Soluong (select-remote) -->
+                <span editable-text="sanpham.soluong" e-name="soluong" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-change="tinhThanhtien(rowform, $data)">
+                  {{ sanpham.soluong || 'empty' }}
+                </span>
+              </td>
+              <td>
+                <!-- editable Gia (text with validation) -->
+                <span editable-text="sanpham.thanhtien" e-name="thanhtien" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-disabled="donhang_layhang">
+                  {{ sanpham.thanhtien || 'empty' }}
+                </span>
+              </td>
+              <td style="white-space: nowrap">
+                <!-- form -->
+                <form editable-form name="rowform" onbeforesave="beforesaveSanpham(rowform, $data)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == sanpham">
+                  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                    lưu
+                  </button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelAdvice(rowform, $index)" class="btn btn-default editable-table-button btn-xs">
+                    hủy
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">sửa</button>
+                  <button class="btn btn-danger editable-table-button btn-xs" ng-click="removeSanpham($index)">xóa</button>
+                </div>  
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-5">
+          <button type="button" class="btn btn-warning" ng-disabled="isSanphamAdded == false" ng-click="savedonhang()">Đặt hàng</button>
+          <button type="button" class="btn btn-warning" ng-disabled="isSanphamAdded == false" ng-click="">In đơn hàng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+﻿{
+    "productConStr": "mongodb://test:test@ds155028.mlab.com:55028/senviet",
+    "connectionString": "mongodb://test:test@ds153709.mlab.com:53709/senviet_test",
+    "apiUrl": "http://localhost:3000/api",
+    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+}
