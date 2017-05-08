@@ -1,8 +1,6 @@
 <div class="row">
-	<div class="col-md-12" ba-panel ba-panel-title="{{screenTitle}}" ba-panel-class="with-scroll">
-		<ba-wizard>
-			<ba-wizard-step title="Thông tin giao hàng" form="vm.donhang.common">
-				<form name="vm.donhang.common" novalidate>
+	<div class="col-md-6" ba-panel ba-panel-title="THÔNG TIN KHÁCH HÀNG" ba-panel-class="with-scroll">
+				
 					<div class="row" style="margin-bottom:20px;">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -70,43 +68,9 @@
 							</div>
 						</div>
 					</div>
-				</form>
-			</ba-wizard-step>
-			<ba-wizard-step title="Thanh toán&Vận chuyển"  form="vm.donhang.thanhtoan">
-				<form name="vm.donhang.thanhtoan" novalidate>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="productName">Hình thức thanh toán</label>
-								<select class="form-control" title="Category" selectpicker ng-model="donhang.thanhtoan.hinhthuc">
-									<option selected>Thanh toán khi nhận hàng</option>
-									<option>Chuyển khoản trước</option>
-								</select>
-								
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="productName">Ngân hàng</label>
-								<input type="text" class="form-control" id="address" name="address" placeholder="Tên ngân hàng" ng-model="donhang.thanhtoan.nganhang">
-								<span class="help-block error-block basic-block">Required</span>
-							</div>
-							<div class="form-group">
-								<label for="productName">Số tài khoản</label>
-								<input type="text" class="form-control" id="address" name="address" placeholder="Số tài khoản" ng-model="donhang.thanhtoan.stk" >
-								<span class="help-block error-block basic-block">Required</span>
-							</div>
-							<div class="form-group">
-								<label for="productName">Tên chủ tài khoản</label>
-								<input type="text" class="form-control" id="address" name="address" placeholder="Chủ tài khoản" ng-model="donhang.thanhtoan.chutaikhoan" >
-								<span class="help-block error-block basic-block">Required</span>
-							</div>
-						</div>
-					</div>
-				</form>
-			</ba-wizard-step>
-			<ba-wizard-step title="Sản phẩm" form="vm.donhang.sanphams">
-				
+			
+					
+			
 					<div class="form-group">
 						<label for="" class="col-sm-2 control-label">Chọn sản phẩm và số lượng</label>
 						<div class="col-sm-12" style="margin-bottom:40px !important;">
@@ -159,9 +123,7 @@
 						</div>
 					</div>
 				
-			</ba-wizard-step>
 			
-			<ba-wizard-step title="Hoàn thành"  form="vm.donhang">
 				<form name="vm.donhang" novalidate>
 					
 					<div id="printdiv1" class="row">
@@ -172,129 +134,105 @@
 							
 						</div>
 					</div>
-					<div id="printdiv2" class="row">
-						<div class="col-sm-12">
-							<table class="table table-bordered">
-								<tr>
-									<td style="width:50%; text-align:left;">
-										<label for="inputMadonhang" class="control-label" style="font-weight:bold;">Mã đơn hàng: </label>
-										{{donhang.madonhang}}
-										
-									</td>
-									<td style="width:50%">
-										<label for="productName">Cửa hàng nhận:</label>
-										<p>{{donhang.common.cuahangnhan}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td style="width:50%; text-align:left;">
-										<label for="inputMadonhang" class="control-label" style="font-weight:bold;">Ngày tạo đơn: </label>
-										{{donhang.common.ngaydathang}}
-										
-									</td>
-									<td>
-										<label for="productName">Người nhận hàng:</label>
-										<p>{{donhang.common.nguoinhan}} - SĐT: {{donhang.common.sdt}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td style="width:50%; text-align:left;">
-										<label for="inputMadonhang" class="control-label" style="font-weight:bold;">Nhân viên: </label>
-										{{donhang.createdby}}
-									</td>
-									<td>
-										<label for="productName">Địa chỉ:</label>
-										<p>{{donhang.common.diachinhan}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td colspan=2 style="text-align:left;">
-										<label for="productName">Ghi chú:</label>
-										<p>{{donhang.common.ghichu}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td colspan=2 style="text-align:left;">
-										<label for="productName">Hình thức thanh toán:</label>
-										<p>{{donhang.thanhtoan.hinhthuc}}</p>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="row" style="margin-bottom:20px;">
-						<div class="col-sm-12">
-							<table class="table table-bordered">
-								<tr>
-									<td style="width:50%; text-align:left;">
-									</td>
-									<td style="width:50%">
-										<label for="productName">Ngân hàng:</label>
-										<p>{{donhang.thanhtoan.nganhang}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<label for="productName">STK:</label>
-										<p>{{donhang.thanhtoan.stk}}</p>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<label for="productName">Chủ tài khoản:</label>
-										<p>{{donhang.thanhtoan.chutaikhoan}}</p>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div id="printdiv3" class="row">
-						<div class="col-sm-12">
-							<table class="table table-bordered table-hover table-condensed">
-								<tr style="font-weight: bold">
-									<td style="width:30%">Tên mặt hàng</td>
-									<td style="width:15%">Số lượng</td>
-									<td style="width:15%">Thành tiền</td>
-									
-								</tr>
-								<tr ng-repeat="sanpham in donhang.sanphams">
-									<td>
-									
-										{{ sanpham.tensanpham.tensanpham }}
-									
-									</td>
-									<td>
-									<!-- editable Soluong (select-remote) -->
-									
-										{{ sanpham.soluong }}
-									
-									</td>
-									<td>
-									<!-- editable Gia (text with validation) -->
-									
-										{{ sanpham.thanhtien }}
-									
-									</td>
-									
-								</tr>
-							</table>
-						</div>
-					</div>
 					
-					<hr>
-					<div class="row">
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-success" ng-click="savedonhang()">Tạo đơn hàng</button>
-							<button type="button" class="btn btn-default btn-with-icon" ng-click="printDiv()" ><i class="fa fa-print"></i>In hóa đơn</button>
-						</div>
-						<div class="col-md-4"></div>
-					</div>
-					<hr>
+					
+					
+					
+				
 				</form>
-			</ba-wizard-step>
-		</ba-wizard>
+			
 	</div>
+  <div class="col-md-6" ba-panel ba-panel-title="TÙY CHỌN" ba-panel-class="with-scroll">
+    
+  </div>
+  <div class="col-md-12" ba-panel ba-panel-title="THÔNG TIN ĐƠN HÀNG" ba-panel-class="with-scroll">
+    <div id="printdiv2" class="row">
+        <div class="col-sm-12">
+          <table class="table table-bordered">
+            <tr>
+              <td style="width:50%; text-align:left;">
+                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Mã đơn hàng: </label>
+                {{donhang.madonhang}}
+                
+              </td>
+              <td style="width:50%">
+                <label for="productName">Cửa hàng nhận:</label>
+                <p>{{donhang.common.cuahangnhan}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width:50%; text-align:left;">
+                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Ngày tạo đơn: </label>
+                {{donhang.common.ngaydathang}}
+                
+              </td>
+              <td>
+                <label for="productName">Người nhận hàng:</label>
+                <p>{{donhang.common.nguoinhan}} - SĐT: {{donhang.common.sdt}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width:50%; text-align:left;">
+                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Nhân viên: </label>
+                {{donhang.createdby}}
+              </td>
+              <td>
+                <label for="productName">Địa chỉ:</label>
+                <p>{{donhang.common.diachinhan}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan=2 style="text-align:left;">
+                <label for="productName">Ghi chú:</label>
+                <p>{{donhang.common.ghichu}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan=2 style="text-align:left;">
+                <label for="productName">Hình thức thanh toán:</label>
+                <p>{{donhang.thanhtoan.hinhthuc}}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  </div>
+  
+  <div class="col-md-6" ba-panel ba-panel-title="GHI CHÚ CHO KHÁCH HÀNG" ba-panel-class="with-scroll">
+    
+  </div>
+  <div class="col-md-6" ba-panel ba-panel-title="THANH TOÁN" ba-panel-class="with-scroll">
+    <div class="row">
+      <div class="form-group">
+        <label for="productName">Hình thức thanh toán</label>
+        <select class="form-control" title="Category" selectpicker ng-model="donhang.thanhtoan.hinhthuc">
+          <option selected>Thanh toán khi nhận hàng</option>
+          <option>Chuyển khoản trước</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="productName">Ngân hàng</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Tên ngân hàng" ng-model="donhang.thanhtoan.nganhang">
+        <span class="help-block error-block basic-block">Required</span>
+      </div>
+      <div class="form-group">
+        <label for="productName">Số tài khoản</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Số tài khoản" ng-model="donhang.thanhtoan.stk" >
+        <span class="help-block error-block basic-block">Required</span>
+      </div>
+      <div class="form-group">
+        <label for="productName">Tên chủ tài khoản</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Chủ tài khoản" ng-model="donhang.thanhtoan.chutaikhoan" >
+        <span class="help-block error-block basic-block">Required</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" ba-panel ba-panel-title="THÔNG TIN NHÀ VẬN CHUYỂN" ba-panel-class="with-scroll">
+    
+  </div>
+  
+  <div class="col-md-12 block-btns">
+    <button class="bt-order" id="submitCreateOrder">ĐẶT HÀNG</button>
+  </div>
+  
 </div>

@@ -17,7 +17,7 @@
           abstract: true,
           title: 'Cửa hàng',
           sidebarMeta: {
-            icon: 'ion-compose',
+            icon: 'ion-ios-people-outline',
             order: 10,
           },
         })
@@ -25,7 +25,7 @@
           url: '/quanly',
           templateUrl: 'pages/cuahang/quanly/quanly.html',
           controller: 'CuahangquanlyCtrl',
-          title: 'Quản lý cửa hàng',
+          title: 'Danh sách cửa hàng',
           sidebarMeta: {
             order: 0,
           },
@@ -34,7 +34,7 @@
           url: '/taomoi',
           templateUrl: 'pages/cuahang/taomoi/taomoi.html',
           controller: 'CuahangtaomoiCtrl',
-          title: 'Chỉnh sửa cửa hàng',
+          title: 'Tạo cửa hàng',
           sidebarMeta: {
             order: 100,
           },

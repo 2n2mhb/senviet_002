@@ -13,7 +13,7 @@
 	editableThemes, CuahangService, SanphamService, DonhangService, toastr) {
 
 	//var vm = this;
-	$scope.screenTitle = "Chỉnh sửa đơn hàng";
+	$scope.screenTitle = "Tạo đơn hàng";
 	$scope.disabled = undefined;
 	$scope.isTaomoi = false;
 	$scope.submitted = false;

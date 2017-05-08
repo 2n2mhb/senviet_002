@@ -17,7 +17,7 @@
 			abstract: true,
 			title: 'Đơn hàng',
 			sidebarMeta: {
-			icon: 'ion-compose',
+			icon: 'ion-ios-pricetags-outline',
 			order: 40,
 			},
 		})
@@ -28,16 +28,16 @@
 			controllerAs: 'vm',
 			title: 'Tạo đơn hàng',
 			sidebarMeta: {
-			order: 0,
+			order: 100,
 			},
 		})
 		.state('donhang.xulydon', {
 			url: '/xulydon',
 			templateUrl: 'pages/donhang/xuly/xuly.html',
 			controller: 'DonhangxulyCtrl',
-			title: 'Xử lý đơn hàng',
+			title: 'Danh sách đơn hàng',
 			sidebarMeta: {
-			order: 100,
+			order: 0,
 			},
 		});
 	}

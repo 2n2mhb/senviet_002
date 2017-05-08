@@ -17,7 +17,7 @@
           abstract: true,
           title: 'Sản phẩm',
           sidebarMeta: {
-            icon: 'ion-compose',
+            icon: 'ion-ios-box-outline',
             order: 20,
           },
         })
@@ -25,7 +25,7 @@
           url: '/quanly',
           templateUrl: 'pages/sanpham/quanly/quanly.html',
           controller: 'SanphamquanlyCtrl',
-          title: 'Quản lý sản phẩm',
+          title: 'Danh sách sản phẩm',
           sidebarMeta: {
             order: 0,
           },
@@ -34,7 +34,7 @@
           url: '/taomoi',
           templateUrl: 'pages/sanpham/taomoi/taomoi.html',
           controller: 'SanphamtaomoiCtrl',
-          title: 'Chỉnh sửa sản phẩm',
+          title: 'Đăng sản phẩm',
           sidebarMeta: {
             order: 100,
           },
