@@ -1,196 +1,114 @@
 <div class="row">
-	<div class="col-md-6" ba-panel ba-panel-title="THÔNG TIN KHÁCH HÀNG" ba-panel-class="with-scroll">
-				
-					<div class="row" style="margin-bottom:20px;">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="inputNgaydat" class="control-label">Ngày giao hàng</label>
-								<p class="input-group">
-									<input type="text" id="inputNgaydat" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options" ng-model="vm.donhang.common.ngaygiao" is-open="datepicker.opened1" ng-required="true" close-text="Close" alt-input-formats="format" show-button-bar="false" required/>
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default" ng-click="open($event, 'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
-									</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="inputCuahanggiao" class="control-label">Cửa hàng giao</label>
-								<ui-select ng-model="donhang.common.cuahanggiao"
-									id="inputBencungcap"
-									class="btn-group bootstrap-select form-control"
-									ng-disabled="false"
-									append-to-body="true"
-									search-enabled="false"
-									on-select="onCuahanggiaoSelected($item)">
-								<ui-select-match placeholder="Chọn bên giao hàng">
-									<span> {{$select.selected.tencuahang}}</span>
-								</ui-select-match>
-								<ui-select-choices repeat="standardItem.tencuahang as standardItem in cuahanggiaos | filter: $select.search">
-									<span ng-bind-html="standardItem.tencuahang"></span>
-								</ui-select-choices>
-								</ui-select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="inputCuahangnhan">Cửa hàng nhận</label>
-								<ui-select ng-model="donhang.common.cuahangnhan"
-									id="inputTrangthai"
-									class="btn-group bootstrap-select form-control"
-									ng-disabled="false"
-									append-to-body="true"
-									search-enabled="false" required
-									on-select="onCuahangnhanSelected($item)">
-								<ui-select-match placeholder="Chọn bên nhận hàng">
-									<span> {{$select.selected.tencuahang}}</span>
-								</ui-select-match>
-								<ui-select-choices repeat="standardItem.tencuahang as standardItem in cuahangnhans | filter: $select.search">
-									<span ng-bind-html="standardItem.tencuahang | highlight: $select.search"></span>
-								</ui-select-choices>
-								</ui-select>
-							</div>
-							<div class="form-group">
-								<label for="inputNguoinhan">Người nhận</label>
-								
-								<input type="text" class="form-control" id="inputNguoinhan" ng-model="donhang.common.nguoinhan" required>
-								
-							</div>
-							<div class="form-group">
-								<label for="inputSdt">Số điện thoại</label>
-								<input type="text" class="form-control" id="inputSdt" ng-model="donhang.common.sdt" required>
-							</div>
-							<div class="form-group">
-								<label for="inputDiachinhan">Địa chỉ</label>
-								<input type="text" class="form-control" id="inputDiachinhan" ng-model="donhang.common.diachinhan" required>
-							</div>
-						</div>
-					</div>
-			
-					
-			
-					<div class="form-group">
-						<label for="" class="col-sm-2 control-label">Chọn sản phẩm và số lượng</label>
-						<div class="col-sm-12" style="margin-bottom:40px !important;">
-							<div class="add-row-editable-table">
-							<button class="btn btn-primary" ng-click="addSanpham()">Thêm</button>
-							</div>
-							<table class="table table-bordered table-hover table-condensed">
-								<tr style="font-weight: bold">
-									<td style="width:30%">Tên mặt hàng</td>
-									<td style="width:15%">Số lượng</td>
-									<td style="width:15%">Thành tiền</td>
-									<td style="width:15%">Thao tác</td>
-								</tr>
-								<tr ng-repeat="sanpham in donhang.sanphams">
-									<td>
-									<!-- editable status (select-local) -->
-									<span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
-										{{ sanpham.tensanpham.tensanpham || 'Error.' }}
-									</span>
-									</td>
-									<td>
-									<!-- editable Soluong (select-remote) -->
-									<span editable-text="sanpham.soluong" e-name="soluong" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-change="tinhThanhtien(rowform, $data)">
-										{{ sanpham.soluong || 'empty' }}
-									</span>
-									</td>
-									<td>
-									<!-- editable Gia (text with validation) -->
-									<span editable-text="sanpham.thanhtien" e-name="thanhtien" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-disabled="donhang_layhang">
-										{{ sanpham.thanhtien || 'empty' }}
-									</span>
-									</td>
-									<td style="white-space: nowrap">
-									<!-- form -->
-									<form editable-form name="rowform" onbeforesave="beforesaveSanpham(rowform, $data)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == sanpham">
-										<button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
-										lưu
-										</button>
-										<button type="button" ng-disabled="rowform.$waiting" ng-click="cancelAdvice(rowform, $index)" class="btn btn-default editable-table-button btn-xs">
-										hủy
-										</button>
-									</form>
-									<div class="buttons" ng-show="!rowform.$visible">
-										<button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">sửa</button>
-										<button class="btn btn-danger editable-table-button btn-xs" ng-click="removeSanpham($index)">xóa</button>
-									</div>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				
-			
-				<form name="vm.donhang" novalidate>
-					
-					<div id="printdiv1" class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								
-							</div>
-							
-						</div>
-					</div>
-					
-					
-					
-					
-				
-				</form>
-			
-	</div>
-  <div class="col-md-6" ba-panel ba-panel-title="TÙY CHỌN" ba-panel-class="with-scroll">
+  <div class="col-md-6" ba-panel ba-panel-title="THÔNG TIN KHÁCH HÀNG" ba-panel-class="with-scroll">
     
+    <div class="form-group">
+      <label for="inputCuahangnhan">Cửa hàng</label>
+      <ui-select ng-model="order.custInfo.cuahangnhan"
+        id="inputCuahangnhan"
+        class="btn-group bootstrap-select form-control"
+        ng-disabled="false"
+        append-to-body="true"
+        search-enabled="false" required
+        on-select="onCuahangnhanSelected($item)">
+        <ui-select-match placeholder="Chọn cửa hàng">
+          <span> {{$select.selected.tencuahang}}</span>
+        </ui-select-match>
+        <ui-select-choices repeat="standardItem.tencuahang as standardItem in cuahangnhans | filter: $select.search">
+          <span ng-bind-html="standardItem.tencuahang | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+    <div class="form-group">
+      <label for="inputNguoinhan">Tên người nhận</label>
+      
+      <input type="text" class="form-control" id="inputNguoinhan" ng-model="order.custInfo.nguoinhan" required>
+      
+    </div>
+    <div class="form-group">
+      <label for="inputSdt">Số điện thoại</label>
+      <input type="text" class="form-control" id="inputSdt" ng-model="order.custInfo.sdt" required>
+    </div>
+    <div class="form-group">
+      <label for="inputDiachinhan">Địa chỉ</label>
+      <input type="text" class="form-control" id="inputDiachinhan" ng-model="order.custInfo.diachinhan" required>
+    </div>
+  </div>
+  <div class="col-md-6" ba-panel ba-panel-title="THANH TOÁN" ba-panel-class="with-scroll">
+    <div class="form-group">
+      <label for="productName">Hình thức thanh toán</label>
+      <select class="form-control" ng-model="order.thanhtoan.hinhthuc" ng-options="v.text for v in thanhtoans"
+      ng-change="onThanhToanSelected()">
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="productName">Ngân hàng</label>
+      <input type="text" class="form-control" id="address" name="address" placeholder="Tên ngân hàng" ng-model="donhang.thanhtoan.nganhang" ng-disabled="disableHinhThuc">
+      <span class="help-block error-block basic-block">Required</span>
+    </div>
+    <div class="form-group">
+      <label for="productName">Số tài khoản</label>
+      <input type="text" class="form-control" id="address" name="address" placeholder="Số tài khoản" ng-model="donhang.thanhtoan.stk" ng-disabled="disableHinhThuc">
+      <span class="help-block error-block basic-block">Required</span>
+    </div>
+    <div class="form-group">
+      <label for="productName">Tên chủ tài khoản</label>
+      <input type="text" class="form-control" id="address" name="address" placeholder="Chủ tài khoản" ng-model="donhang.thanhtoan.chutaikhoan" ng-disabled="disableHinhThuc">
+      <span class="help-block error-block basic-block">Required</span>
+    </div>
+  </div>
+  <div class="col-md-6" ba-panel ba-panel-title="GHI CHÚ CHO KHÁCH HÀNG" ba-panel-class="with-scroll">
+    <div class="form-group">
+      <label for="textarea01">Ghi chú</label>
+      <textarea class="form-control" id="textarea01"></textarea>
+    </div>
   </div>
   <div class="col-md-12" ba-panel ba-panel-title="THÔNG TIN ĐƠN HÀNG" ba-panel-class="with-scroll">
-    <div id="printdiv2" class="row">
-        <div class="col-sm-12">
-          <table class="table table-bordered">
-            <tr>
-              <td style="width:50%; text-align:left;">
-                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Mã đơn hàng: </label>
-                {{donhang.madonhang}}
-                
-              </td>
-              <td style="width:50%">
-                <label for="productName">Cửa hàng nhận:</label>
-                <p>{{donhang.common.cuahangnhan}}</p>
-              </td>
+      <div class="form-group">
+        <label for="" class="col-md-3 control-label">Chọn sản phẩm và số lượng</label>
+        <div class="col-sm-12" style="margin-bottom:40px !important;">
+          <div class="add-row-editable-table">
+          <button class="btn btn-primary" ng-click="addSanpham()">Thêm</button>
+          </div>
+          <table class="table table-bordered table-hover table-condensed">
+            <tr style="font-weight: bold">
+              <td style="width:30%">Tên mặt hàng</td>
+              <td style="width:15%">Số lượng</td>
+              <td style="width:15%">Thành tiền</td>
+              <td style="width:15%">Thao tác</td>
             </tr>
-            <tr>
-              <td style="width:50%; text-align:left;">
-                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Ngày tạo đơn: </label>
-                {{donhang.common.ngaydathang}}
-                
+            <tr ng-repeat="sanpham in order.sanphams">
+              <td>
+              <!-- editable status (select-local) -->
+              <span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
+                {{ sanpham.tensanpham.tensanpham || 'Error.' }}
+              </span>
               </td>
               <td>
-                <label for="productName">Người nhận hàng:</label>
-                <p>{{donhang.common.nguoinhan}} - SĐT: {{donhang.common.sdt}}</p>
-              </td>
-            </tr>
-            <tr>
-              <td style="width:50%; text-align:left;">
-                <label for="inputMadonhang" class="control-label" style="font-weight:bold;">Nhân viên: </label>
-                {{donhang.createdby}}
+              <!-- editable Soluong (select-remote) -->
+              <span editable-text="sanpham.soluong" e-name="soluong" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-change="tinhThanhtien(rowform, $data)">
+                {{ sanpham.soluong || 'empty' }}
+              </span>
               </td>
               <td>
-                <label for="productName">Địa chỉ:</label>
-                <p>{{donhang.common.diachinhan}}</p>
+              <!-- editable Gia (text with validation) -->
+              <span editable-text="sanpham.thanhtien" e-name="thanhtien" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-disabled="donhang_layhang">
+                {{ sanpham.thanhtien || 'empty' }}
+              </span>
               </td>
-            </tr>
-            <tr>
-              <td colspan=2 style="text-align:left;">
-                <label for="productName">Ghi chú:</label>
-                <p>{{donhang.common.ghichu}}</p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan=2 style="text-align:left;">
-                <label for="productName">Hình thức thanh toán:</label>
-                <p>{{donhang.thanhtoan.hinhthuc}}</p>
+              <td style="white-space: nowrap">
+              <!-- form -->
+              <form editable-form name="rowform" onbeforesave="beforesaveSanpham(rowform, $data)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == sanpham">
+                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+                lưu
+                </button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelAdvice(rowform, $index)" class="btn btn-default editable-table-button btn-xs">
+                hủy
+                </button>
+              </form>
+              <div class="buttons" ng-show="!rowform.$visible">
+                <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">sửa</button>
+                <button class="btn btn-danger editable-table-button btn-xs" ng-click="removeSanpham($index)">xóa</button>
+              </div>
               </td>
             </tr>
           </table>
@@ -198,41 +116,10 @@
       </div>
   </div>
   
-  <div class="col-md-6" ba-panel ba-panel-title="GHI CHÚ CHO KHÁCH HÀNG" ba-panel-class="with-scroll">
-    
-  </div>
-  <div class="col-md-6" ba-panel ba-panel-title="THANH TOÁN" ba-panel-class="with-scroll">
-    <div class="row">
-      <div class="form-group">
-        <label for="productName">Hình thức thanh toán</label>
-        <select class="form-control" title="Category" selectpicker ng-model="donhang.thanhtoan.hinhthuc">
-          <option selected>Thanh toán khi nhận hàng</option>
-          <option>Chuyển khoản trước</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="productName">Ngân hàng</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Tên ngân hàng" ng-model="donhang.thanhtoan.nganhang">
-        <span class="help-block error-block basic-block">Required</span>
-      </div>
-      <div class="form-group">
-        <label for="productName">Số tài khoản</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Số tài khoản" ng-model="donhang.thanhtoan.stk" >
-        <span class="help-block error-block basic-block">Required</span>
-      </div>
-      <div class="form-group">
-        <label for="productName">Tên chủ tài khoản</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Chủ tài khoản" ng-model="donhang.thanhtoan.chutaikhoan" >
-        <span class="help-block error-block basic-block">Required</span>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6" ba-panel ba-panel-title="THÔNG TIN NHÀ VẬN CHUYỂN" ba-panel-class="with-scroll">
-    
-  </div>
+  
   
   <div class="col-md-12 block-btns">
-    <button class="bt-order" id="submitCreateOrder">ĐẶT HÀNG</button>
+    <button class="bt-order" ng-click="saveOrder()">TẠO ĐƠN HÀNG</button>
   </div>
   
 </div>
