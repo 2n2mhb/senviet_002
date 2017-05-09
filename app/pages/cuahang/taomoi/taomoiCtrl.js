@@ -31,7 +31,7 @@
     $scope.thongtincuahang.sanphams = [];
     
     $scope.tensanphams = [];
-
+    $scope.disableThem = true;
     initController();
     
     function initController() {
@@ -42,6 +42,7 @@
             $scope.thongtincuahang = user;
             $scope.thongtincuahang.updatedby = $rootScope.loggedinuser.username;
             //console.log('aaaaa');
+            $scope.disableThem = false;
           });
         } else {
           $scope.thongtincuahang.createdby = $rootScope.loggedinuser.username;
@@ -93,7 +94,7 @@
         CuahangService.CreateBasicInfo($scope.thongtincuahang)
           .then(function () {
               toastr.success('Your information has been saved successfully!');
-              
+              $scope.disableThem = false;
           })
           .catch(function (error) {
               toastr.error("Your information hasn't been saved!", 'Error');
@@ -222,6 +223,10 @@
       //console.log(rowform, index);
       $scope.isTaomoi = false;
       rowform.$show()
+    }
+    
+    $scope.setPrice = function(rowform, index) {
+      console.log("setPrice called.");
     }
 
     editableOptions.theme = 'bs3';

@@ -49,6 +49,7 @@
     chutaikhoan : null
   };
   $scope.disableHinhThuc = true;
+  $scope.disableThem = true;
   
   $scope.cuahangnhans = [];
   $scope.tensanphams = [];
@@ -238,12 +239,13 @@
   
   $scope.onCuahangnhanSelected = function(item) {
 
-    $scope.order.cuahangnhan_id = item._id;
+    $scope.order.custInfo.cuahangnhan_id = item._id;
     // get thongtincuahang
     CuahangService.GetInfoById(item._id).then(function (user) {
       $scope.order.custInfo.nguoinhan = user.chucuahang;
       $scope.order.custInfo.diachinhan = user.diachi;
       $scope.order.custInfo.sdt = user.diachi;
+      $scope.disableThem = false;
       // Lấy gói sản phẩm đã set, bổ sung thông tin.
       $scope.cuahangsanphams = user.sanphams;
       // bổ sung thông tin.

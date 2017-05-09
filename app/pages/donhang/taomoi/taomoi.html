@@ -67,33 +67,41 @@
         <label for="" class="col-md-3 control-label">Chọn sản phẩm và số lượng</label>
         <div class="col-sm-12" style="margin-bottom:40px !important;">
           <div class="add-row-editable-table">
-          <button class="btn btn-primary" ng-click="addSanpham()">Thêm</button>
+          <button class="btn btn-primary" ng-click="addSanpham()" ng-disabled="disableThem">Thêm</button>
           </div>
           <table class="table table-bordered table-hover table-condensed">
             <tr style="font-weight: bold">
-              <td style="width:30%">Tên mặt hàng</td>
-              <td style="width:15%">Số lượng</td>
+              <td style="width:25%">Tên mặt hàng</td>
+              <td style="width:10%">Gói sản phẩm</td>
+              <td style="width:10%">Đơn giá</td>
+              <td style="width:10%">Số lượng đặt</td>
               <td style="width:15%">Thành tiền</td>
               <td style="width:15%">Thao tác</td>
             </tr>
             <tr ng-repeat="sanpham in order.sanphams">
               <td>
-              <!-- editable status (select-local) -->
-              <span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
-                {{ sanpham.tensanpham.tensanpham || 'Error.' }}
-              </span>
+                <!-- editable status (select-local) -->
+                <span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
+                  {{ sanpham.tensanpham.tensanpham || 'Error.' }}
+                </span>
+              </td>
+              <td>
+                <!-- editable status (select-local) -->
+                <span editable-select="sanpham.tensanpham" e-name="tensanpham" e-form="rowform" e-ng-options="s as s.tensanpham for s in cuahangsanphams" onbeforesave="checkEmpty($data)" e-ng-change="selectSanpham(rowform)" >
+                  {{ sanpham.tensanpham.tensanpham || 'Error.' }}
+                </span>
               </td>
               <td>
               <!-- editable Soluong (select-remote) -->
-              <span editable-text="sanpham.soluong" e-name="soluong" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-change="tinhThanhtien(rowform, $data)">
-                {{ sanpham.soluong || 'empty' }}
-              </span>
+                <span editable-text="sanpham.soluong" e-name="soluong" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-change="tinhThanhtien(rowform, $data)">
+                  {{ sanpham.soluong || 'empty' }}
+                </span>
               </td>
               <td>
               <!-- editable Gia (text with validation) -->
-              <span editable-text="sanpham.thanhtien" e-name="thanhtien" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-disabled="donhang_layhang">
-                {{ sanpham.thanhtien || 'empty' }}
-              </span>
+                <span editable-text="sanpham.thanhtien" e-name="thanhtien" e-form="rowform" onbeforesave="checkEmpty($data)" e-required e-ng-disabled="donhang_layhang">
+                  {{ sanpham.thanhtien || 'empty' }}
+                </span>
               </td>
               <td style="white-space: nowrap">
               <!-- form -->
